@@ -1,12 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './Navbar.module.css';
 
 const Navbar = (props) => {
     return (
         <nav className={styles.navbar}>
-            <h1>Xplor</h1>
+            <Link to="/">
+                <h1>Xplor</h1>
+            </Link>
             <ul>
-                <li>Destinations</li>
+                <li>
+                    <Link to="/destinations">Destinations</Link>
+                </li>
                 <li>Login</li>
                 <li>Signup</li>
             </ul>

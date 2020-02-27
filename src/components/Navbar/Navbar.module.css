@@ -4,8 +4,12 @@
     height: 5rem;
     background-color: rgb(62, 134, 243);
     justify-content: space-around;
-    color: #ffffff;
     box-shadow: 2px 2px 6px 2px lightgrey;
+}
+
+.navbar h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
 }
 
 .navbar ul {
@@ -20,4 +24,9 @@
 
 .navbar ul li:hover {
     border-bottom: 2px solid gray;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #ffffff;
 }
