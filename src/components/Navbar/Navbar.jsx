@@ -7,7 +7,7 @@ const Navbar = (props) => {
     return (
         <nav className={styles.navbar}>
             <Link to="/">
-                <h1>Xplor</h1>
+                <h1>Xpl🌎r</h1>
             </Link>
             <ul>
                 <li>
