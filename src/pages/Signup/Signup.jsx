@@ -5,7 +5,7 @@ const Signup = (props) => {
     return (
         <main>
             <h1>Signup</h1>
-            <SignupForm />
+            <SignupForm {...props} />
         </main>
     );
 };
