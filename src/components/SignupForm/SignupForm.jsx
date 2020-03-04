@@ -13,7 +13,8 @@ class SignupForm extends Component {
             name: '',
             email: '',
             password: '',
-            passwordConf: ''
+            passwordConf: '',
+            error: ''
         };
     }
 
@@ -29,7 +30,8 @@ class SignupForm extends Component {
 
     handleChange = e => {
         this.setState({
-            [e.target.name]: e.target.value
+            error: '',
+            ...{[e.target.name]: e.target.value}
         });
     }
 
@@ -41,17 +43,28 @@ class SignupForm extends Component {
             const { name, email, password } = this.state;
             await userService.signup({name, email, password });
             this.setState(this.getInitialState(), () => {
-                this.props.history.push('/')
+                this.props.handleSignupOrLogin();
+                this.props.history.push('/');
             });
-            
+
          } catch (error) {
-             
+             this.setState({
+                name: '',
+                email: '',
+                password: '',
+                passwordConf: '',
+                error: error.message,
+            });
          }
     }
 
     render () {
         return (
-            <form onSubmit={this.handleSubmit} className={styles.form}>
+        <section className={styles.section}>
+            {
+                this.state.error && <p>{this.state.error}</p>
+            }
+            <form onSubmit={this.handleSubmit}>
                 <fieldset>
                     <legend>Signup Form</legend>
                     <label htmlFor="name">Full Name</label>
@@ -93,6 +106,7 @@ class SignupForm extends Component {
                     <button disabled={!this.isFormValid()} type="submit">Submit</button>
                 </fieldset>
             </form>
+        </section>
         );
     }
 }
