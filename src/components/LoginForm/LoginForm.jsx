@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import userService from '../../utils/userService';
+
 import styles from './LoginForm.module.css';
 
 class LoginForm extends Component {
@@ -9,8 +11,16 @@ class LoginForm extends Component {
     getInitialState() {
         return {
             email: '',
-            password: ''
+            password: '',
+            error: ''
         };
+    }
+
+    isFormValid = () => {
+        return (
+            this.state.email && 
+            this.state.password
+        );
     }
 
     handleChange = e => {
@@ -19,9 +29,20 @@ class LoginForm extends Component {
         });
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        this.setState(this.getInitialState());
+        if(!this.isFormValid()) return;
+
+        try {
+            const { email, password } = this.state;
+
+            await userService.login({ email, password });
+            
+            this.setState(this.getInitialState());
+        } catch (error) {
+            
+        }
+        
     }
 
     render () {
@@ -47,7 +68,7 @@ class LoginForm extends Component {
                         onChange={this.handleChange}
                     />
 
-                    <button type="submit">Login</button>
+                    <button disabled={!this.isFormValid()} type="submit">Login</button>
                 </fieldset>
             </form>
         );
