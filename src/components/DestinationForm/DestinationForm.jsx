@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-// import userService from '../../utils/userService';
+import userService from '../../utils/userService';
+import destinationService from '../../utils/destinationService';
 
 import styles from './DestinationForm.module.css';
 
@@ -36,11 +37,11 @@ class DestinationForm extends Component {
 
         try {
             const { city, country } = this.state;
+            const addedBy = userService.getUser()._id
+            await destinationService.create({ city, country, addedBy });
             
             this.setState(this.getInitialState(), () => {
-
                 this.props.history.push('/destinations');
-
             });
 
         } catch (error) {
