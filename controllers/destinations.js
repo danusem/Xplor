@@ -1,8 +1,18 @@
 const Destination = require('../models/destination');
 
 module.exports = {
-    create
+    create,
+    index
 };
+
+async function index(req, res) {
+    try {
+        const destinations = await Destination.find({}).sort('-createdAt');
+        res.json({ destinations });
+    } catch (error) {
+        res.status(400).json({err: 'unauthorized'});
+    }
+}
 
 async function create(req, res) {
     try {
