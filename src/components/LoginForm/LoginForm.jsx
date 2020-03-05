@@ -25,6 +25,7 @@ class LoginForm extends Component {
 
     handleChange = e => {
         this.setState({
+            error: '', 
             [e.target.name]: e.target.value
         });
     }
@@ -38,18 +39,33 @@ class LoginForm extends Component {
 
             await userService.login({ email, password });
             
-            this.setState(this.getInitialState());
+            this.setState(this.getInitialState(), () => {
+
+                this.props.handleSignupOrLogin();
+                this.props.history.push('/destinations');
+
+            });
+
         } catch (error) {
-            
+            this.setState ({
+                email: '',
+                password: '',
+                error: error.message
+            });
         }
         
     }
 
     render () {
         return (
-            <form onSubmit={this.handleSubmit} className={styles.form}>
+            <section className={styles.section}>
+                {
+                    this.state.error && <p>{this.state.error}</p>
+                }
+            <form onSubmit={this.handleSubmit} >
                 <fieldset>
                     <legend>Login Form</legend>
+
                     <label htmlFor="email">Email</label>
                     <input 
                         id="email" 
@@ -57,7 +73,7 @@ class LoginForm extends Component {
                         type="email" 
                         value={this.state.email}
                         onChange={this.handleChange}
-                    />
+                        />
 
                     <label htmlFor="password">Password</label>
                     <input 
@@ -66,11 +82,13 @@ class LoginForm extends Component {
                         type="password" 
                         value={this.state.password}
                         onChange={this.handleChange}
-                    />
+                        />
 
                     <button disabled={!this.isFormValid()} type="submit">Login</button>
                 </fieldset>
             </form>
+
+            </section>  
         );
     }
 }
