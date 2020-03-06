@@ -29,3 +29,7 @@
     font-weight: 600;
     font-size: 1.2rem;
 }
+
+.section form {
+    margin-top: 50px;
+}

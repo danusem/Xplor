@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-// import styles from './Destinations.module.css';
+import styles from './Destinations.module.css';
 
 import DestinationForm from '../../components/DestinationForm/DestinationForm';
 
 const Destinations = (props) => {
+    console.log("this is props >>>> ", props)
+    const [ formVisible, setVisibility ] = useState(false);
     return (
-        <main>
+        <main className={styles.destinations}>
             <h1>Destinations</h1>
+            <button onClick={() => setVisibility(!formVisible)}>
+                {formVisible ? 'Hide Form' : 'Show Form'}
+            </button>
             {
-                props.destinations.map(({_id, city, country}) => (
+                formVisible
+                &&
+                <DestinationForm {...props} addDestination={props.handleAddDestination}/>
+            }
+            {
+                props.destinations.length < 0 && props.destinations.map(({_id, city, country}) => (
                 <section key={_id}>
                     <h1>{city}</h1>
                     <p>Country: {country}</p>
@@ -17,7 +27,6 @@ const Destinations = (props) => {
                 </section>
                 ))
             }
-            <DestinationForm {...props} addDestination={props.handleAddDestination}/>
         </main>
     );
 };
