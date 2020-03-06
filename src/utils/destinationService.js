@@ -1,5 +1,9 @@
 const BASE_URL = '/api/destinations/';
 
+function getFeatured() {
+    return fetch(BASE_URL + 'featured').then(res => res.json());
+}
+
 function index() {
     return fetch(BASE_URL).then(res => res.json());
 }
@@ -20,5 +24,6 @@ function create(data) {
 
 export default {
     create,
-    index
+    index,
+    getFeatured
 }

@@ -17,20 +17,23 @@ class App extends Component {
 
   state = {
     user: userService.getUser(),
-    destinations: []
+    destinations: [],
+    featuredDestinations: []
   }
 
   handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser()})
+    this.setState({ user: userService.getUser()}, () => {
+      this.handleAddDestination();
+    })
   }
 
   handleLogout = () => {
     userService.logout();
-    this.setState({ user: null });
+    this.setState({ user: null, destinations: [] });
   }
 
   handleAddDestination = (destination) => {
-    console.log(destination.city, destination.country)
+
     
     this.setState({
       destination: this.state.destinations.push(destination)
@@ -38,9 +41,15 @@ class App extends Component {
 
   }
 
+  handleGetFeaturedDestinations = async () => {
+    const { featuredDestinations } = await destinationService.getFeatured();
+    this.setState ({ featuredDestinations });
+  }
+
   async componentDidMount() {
     if(userService.getUser()) {
       const { destinations } = await destinationService.index();
+      this.handleGetFeaturedDestinations();
       this.setState({ destinations });
     }
   }
@@ -52,7 +61,7 @@ class App extends Component {
         <div className="App-inner-container">
             <Switch>
               <Route exact path="/" render={props =>
-                <Home />
+                <Home featuredDestinations={this.state.featuredDestinations} />
               }/>
               <Route exact path="/destinations" render={props =>
                 userService.getUser()

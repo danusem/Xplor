@@ -2,8 +2,19 @@ const Destination = require('../models/destination');
 
 module.exports = {
     create,
-    index
+    index,
+    getFeatured
 };
+
+async function getFeatured(req, res) {
+    try {
+        const featuredDestinations = await Destination.find({})
+        .sort('-createdAt').limit(1).populate('addedBy');
+        res.json({ featuredDestinations });
+    } catch (error) {
+        res.status(400).json({err: 'bad request'});
+    }
+}
 
 async function index(req, res) {
     try {
