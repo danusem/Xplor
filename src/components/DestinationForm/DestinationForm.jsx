@@ -38,11 +38,9 @@ class DestinationForm extends Component {
         try {
             const { city, country } = this.state;
             const addedBy = userService.getUser()._id
-            await destinationService.create({ city, country, addedBy });
+            const result = await destinationService.create({ city, country, addedBy });
+            this.props.addDestination(result.destination)
             
-            this.setState(this.getInitialState(), () => {
-                this.props.history.push('/destinations');
-            });
 
         } catch (error) {
             this.setState ({
@@ -82,7 +80,7 @@ class DestinationForm extends Component {
                         onChange={this.handleChange}
                         />
 
-                    <button disabled={!this.isFormValid()} type="submit">Add Destination</button>
+                    <button disabled={!this.isFormValid()} type="submit" onClick={this.handleDestination}>Add Destination</button>
                 </fieldset>
             </form>
 

@@ -5,9 +5,11 @@ const destinationSchema = new Schema({
     city: {
         type: String,
         required: true
-    
     },
-    country: String, 
+    country: {
+        type: String, 
+        required: true
+    },    
     addedBy: {
         type: Schema.Types.ObjectId,
         ref: 'User'

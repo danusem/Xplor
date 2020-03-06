@@ -8,7 +8,16 @@ const Destinations = (props) => {
     return (
         <main>
             <h1>Destinations</h1>
-            <DestinationForm {...props} />
+            {
+                props.destinations.map(({_id, city, country}) => (
+                <section key={_id}>
+                    <h1>{city}</h1>
+                    <p>Country: {country}</p>
+                    {/* <small>Added By: {addedBy.name}</small> */}
+                </section>
+                ))
+            }
+            <DestinationForm {...props} addDestination={props.handleAddDestination}/>
         </main>
     );
 };

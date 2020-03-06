@@ -11,11 +11,13 @@ import Signup from './pages/Signup/Signup';
 
 import './App.css';
 import userService from './utils/userService';
+import destinationService from './utils/destinationService';
 
 class App extends Component {
 
   state = {
-    user: userService.getUser()
+    user: userService.getUser(),
+    destinations: []
   }
 
   handleSignupOrLogin = () => {
@@ -25,6 +27,22 @@ class App extends Component {
   handleLogout = () => {
     userService.logout();
     this.setState({ user: null });
+  }
+
+  handleAddDestination = (destination) => {
+    console.log(destination.city, destination.country)
+    
+    this.setState({
+      destination: this.state.destinations.push(destination)
+    })
+
+  }
+
+  async componentDidMount() {
+    if(userService.getUser()) {
+      const { destinations } = await destinationService.index();
+      this.setState({ destinations });
+    }
   }
 
   render() {
@@ -38,7 +56,11 @@ class App extends Component {
               }/>
               <Route exact path="/destinations" render={props =>
                 userService.getUser()
-                ? <Destinations />
+                ? <Destinations 
+                  {...props} 
+                  destinations={this.state.destinations}
+                  handleAddDestination={this.handleAddDestination}
+                />
                 : <Redirect to="/login" />
               }/>
               <Route exact path="/login" render={props =>
