@@ -7,7 +7,8 @@ module.exports = {
 
 async function index(req, res) {
     try {
-        const destinations = await Destination.find({}).sort('-createdAt');
+        const destinations = await Destination.find({})
+        .sort('-createdAt').populate('addedBy');
         res.json({ destinations });
     } catch (error) {
         res.status(400).json({err: 'unauthorized'});
