@@ -11,6 +11,11 @@
     color: white;
 }
 
+.destinations h2 {
+    text-decoration: underline;
+    color: white;
+}
+
 .destinations p {
     color: white;
     margin: 0;

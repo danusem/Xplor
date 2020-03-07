@@ -21,7 +21,7 @@ const Destinations = (props) => {
             {
                 props.destinations.map(({_id, city, country}) => (
                 <section key={_id}>
-                    <h1>{city}</h1>
+                    <h2>{city}</h2>
                     <p>Country: {country}</p>
                     {/* <small>Added By: {addedBy.name}</small> */}
                 </section>
