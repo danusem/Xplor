@@ -30,8 +30,6 @@ function create(data) {
     })
 } 
 
-
-
 export default {
     create,
     index,
