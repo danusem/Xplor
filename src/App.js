@@ -12,13 +12,19 @@ import Signup from './pages/Signup/Signup';
 import './App.css';
 import userService from './utils/userService';
 import destinationService from './utils/destinationService';
+import { getCurrentLatLng } from './utils/getCurrLocationService';
+import { getCurWeatherByLatLng } from './utils/weatherService';
 
 class App extends Component {
 
   state = {
     user: userService.getUser(),
     destinations: [],
-    featuredDestinations: []
+    featuredDestinations: [],
+    lat: null,
+    lng: null,
+    temp: '',
+    icon: null
   }
 
   handleSignupOrLogin = () => {
@@ -42,12 +48,27 @@ class App extends Component {
     this.setState ({ featuredDestinations });
   }
 
+  handleGetCurrentWeather = async () => {
+    const { lat, lng } = await getCurrentLatLng();
+    const weatherData = await getCurWeatherByLatLng(lat, lng);
+    this.setState({
+      lat,
+      lng,
+      temp: Math.round(weatherData.main.temp),
+      icon: weatherData.weather[0].icon
+    });
+    console.log(weatherData);
+    console.log(lat, lng);
+  }
+
   async componentDidMount() {
     if(userService.getUser()) {
       const { destinations } = await destinationService.index();
       this.handleGetFeaturedDestinations();
       this.setState({ destinations });
+      this.handleGetCurrentWeather();
     }
+    
   }
 
   render() {
@@ -65,6 +86,9 @@ class App extends Component {
                   {...props} 
                   destinations={this.state.destinations}
                   handleGetDestinations={this.handleGetDestinations}
+                  handleGetCurrentWeather={this.handleGetCurrentWeather}
+                  temp={this.state.temp}
+                  icon={this.state.icon}
                 />
                 : <Redirect to="/login" />
               }/>

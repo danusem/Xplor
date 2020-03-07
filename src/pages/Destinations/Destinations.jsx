@@ -5,11 +5,17 @@ import styles from './Destinations.module.css';
 import DestinationForm from '../../components/DestinationForm/DestinationForm';
 
 const Destinations = (props) => {
-    console.log("this is props >>>> ", props)
     const [ formVisible, setVisibility ] = useState(false);
     return (
         <main className={styles.destinations}>
             <h1>Destinations</h1>
+            <p>Current Temp: {props.temp}&deg;</p><p>{props.icon && (
+            <img
+              src={`https://openweathermap.org/img/w/${props.icon}.png`}
+              alt="Current Conditions"
+            />
+            )}
+            </p>
             <button onClick={() => setVisibility(!formVisible)}>
                 {formVisible ? 'Hide Form' : 'Show Form'}
             </button>
