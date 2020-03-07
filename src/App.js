@@ -23,7 +23,7 @@ class App extends Component {
 
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser()}, () => {
-      this.handleAddDestination();
+      this.handleGetDestinations();
     })
   }
 
@@ -32,13 +32,9 @@ class App extends Component {
     this.setState({ user: null, destinations: [] });
   }
 
-  handleAddDestination = (destination) => {
-
-    
-    this.setState({
-      destination: this.state.destinations.push(destination)
-    })
-
+  handleGetDestinations = async () => {
+    const { destinations } = await destinationService.index();
+    this.setState({ destinations })
   }
 
   handleGetFeaturedDestinations = async () => {
@@ -68,7 +64,7 @@ class App extends Component {
                 ? <Destinations 
                   {...props} 
                   destinations={this.state.destinations}
-                  handleAddDestination={this.handleAddDestination}
+                  handleGetDestinations={this.handleGetDestinations}
                 />
                 : <Redirect to="/login" />
               }/>
