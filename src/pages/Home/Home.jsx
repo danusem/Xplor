@@ -1,5 +1,5 @@
 import React from 'react';
-import island from './island.jpg';
+//import island from './island.jpg';
 
 import styles from './Home.module.css';
 
@@ -15,7 +15,7 @@ const Home = (props) => {
 
                 ))
             }
-            <img className={styles.pic} src={island} alt="island"/>
+           {/* <img className={styles.pic} src={island} alt="island"/> */}
         </main>
     );
 };
