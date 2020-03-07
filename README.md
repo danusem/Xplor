@@ -8,7 +8,7 @@ Xplor is a travel app that encourages people to travel more and get out there an
 
 ![Login Page](./public/images/Login-Page.png)
 
-![Destinations Homepage](./public/images/Destinations-Homepage.png)
+![Destinations Homepage](./public/images/Homepage.png)
 
 ## Technologies Used
 MongoDB/Mongoose, Express, React, Node
