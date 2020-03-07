@@ -1,0 +1,22 @@
+.destinations {
+    text-align: center;
+    /* background-color: rgb(197, 207, 218); */
+    height: 100%;
+    background-color:#23a4b9;
+}
+
+.destinations h1 {
+    text-decoration: underline;
+    margin-top: 0px;
+    color: white;
+}
+
+.destinations p {
+    color: white;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.destinations button {
+    margin-bottom: 20px;
+}

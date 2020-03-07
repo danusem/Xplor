@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    background-color: #00479f;
+    justify-content: space-around;
+    box-shadow: 2px 2px 6px 2px lightgrey;
+}
+
+.navbar h1 {
+    font-family: 'Luckiest Guy';
+    font-size: 3rem;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li {
+    font-weight: 500;
+    margin: 1rem;
+}
+
+.navbar ul li:hover {
+    border-bottom: 2px solid gray;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #ffffff;
+}
