@@ -38,8 +38,8 @@ class DestinationForm extends Component {
         try {
             const { city, country } = this.state;
             const addedBy = userService.getUser()._id
-            const result = await destinationService.create({ city, country, addedBy });
-            this.props.addDestination(result.destination)
+            await destinationService.create({ city, country, addedBy });
+            this.props.handleGetDestinations()
             
 
         } catch (error) {

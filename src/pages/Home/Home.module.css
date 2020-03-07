@@ -1,7 +1,6 @@
 .home {
     width: 100vw;
     height: 100vh;
-    /*position: relative; */
     text-align: center;
     background-image: url('./island.jpg');
     background-size: cover;
@@ -26,8 +25,6 @@
     color: white;
     margin: 0;
     padding: 3rem;
-    /*position: absolute; */
-    /*margin-top: 60px; */
     text-decoration: underline;
     font-weight: 800;
 }

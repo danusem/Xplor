@@ -16,10 +16,10 @@ const Destinations = (props) => {
             {
                 formVisible
                 &&
-                <DestinationForm {...props} addDestination={props.handleAddDestination}/>
+                <DestinationForm {...props} />
             }
             {
-                props.destinations.length < 0 && props.destinations.map(({_id, city, country}) => (
+                props.destinations.map(({_id, city, country}) => (
                 <section key={_id}>
                     <h1>{city}</h1>
                     <p>Country: {country}</p>
